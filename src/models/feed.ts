@@ -1,7 +1,9 @@
 import type { StoreDefinition} from "pinia";
 import type { IContentModel } from "./iconentmodel";
+import type { FeedType } from "./feedType";
 
 export interface IFeedStoreState<T extends IContentModel> {
+    userId: string;
     content: Array<T>,
     state: boolean
 }
@@ -14,6 +16,7 @@ export declare interface IFeedStoreDefinition<T extends IContentModel> extends S
 
 export interface IFeed {
     readonly name: string;
+    readonly type: FeedType;
     state: boolean;
     store: IFeedStoreDefinition<IContentModel>
 }

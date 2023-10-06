@@ -4,17 +4,24 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <div class="wrapper">
+    <div>
       <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav>
     </div>
   </header>
-  <main>
+  <main class="h-full w-full">
     <RouterView />
   </main>
 </template>
 
-<style scoped>
-
+<style>
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
 </style>

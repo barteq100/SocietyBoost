@@ -1,4 +1,4 @@
 interface IFeedService<T> {
-    loadState(): Promise<Array<T>>;
+    loadState(userId: string): Promise<Array<T>>;
     refeshState(): Promise<Array<T>>;
   }

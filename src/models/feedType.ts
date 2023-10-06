@@ -1,5 +1,5 @@
 export enum FeedType {
- Twitter,
- Facebook,
- Instagram
+ Twitter = "Twitter",
+ Facebook = "Facebook",
+ Instagram = "Instagram"
 }

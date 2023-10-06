@@ -6,9 +6,10 @@ import { defineStore} from "pinia";
 
 
 
-export function getFeedStore<T extends IContentModel>(name: string, contentService: IFeedService<T>) {
+export function getFeedStore<T extends IContentModel>(name: string, userId: string, contentService: IFeedService<T>) {
     return defineStore(name, {
         state: (): IFeedStoreState<T> => ({
+            userId: userId,
             content: new Array<T>(),
             state: false
         }),
@@ -17,7 +18,7 @@ export function getFeedStore<T extends IContentModel>(name: string, contentServi
         },
         actions: {
         async loadState() {
-                const data = await contentService.loadState().then(c => c);
+                const data = await contentService.loadState(userId).then(c => c);
                 this.content = data;
                 this.state = true;
         },

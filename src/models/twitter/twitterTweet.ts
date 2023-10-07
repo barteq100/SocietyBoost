@@ -1,5 +1,8 @@
 import type { IContentModel } from "@/models/iconentmodel";
 
+export interface ITwitterAttachment {
+    media_keys: string[];
+}
 export interface ITwitterTweet extends IContentModel {
     id: string;
     text: string;
@@ -7,8 +10,8 @@ export interface ITwitterTweet extends IContentModel {
     author_id: string;
     retweets_count: number;
     comment_count: number;
-    likes_count: number 
-    // add attachments
+    likes_count: number;
+    attachments?: ITwitterAttachment[];
 }
 
 export class TwitterTweet implements ITwitterTweet {
@@ -19,9 +22,10 @@ export class TwitterTweet implements ITwitterTweet {
     author_id: string;
     retweets_count: number;
     comment_count: number;
-    likes_count: number
+    likes_count: number;
+    attachments: ITwitterAttachment[];
 
-    constructor(_id: string, _text: string, _created_at: Date, _author_id: string, _retweets_count: number, _comment_count: number, _likes_count: number) {
+    constructor(_id: string, _text: string, _created_at: Date, _author_id: string, _retweets_count: number, _comment_count: number, _likes_count: number, _attachments: ITwitterAttachment[]) {
         this.id = _id;
         this.text = _text;
         this.created_at = _created_at;
@@ -29,6 +33,7 @@ export class TwitterTweet implements ITwitterTweet {
         this.retweets_count = _retweets_count;
         this.comment_count = _comment_count;
         this.likes_count = _likes_count;
+        this.attachments = _attachments;
     }
     
 }

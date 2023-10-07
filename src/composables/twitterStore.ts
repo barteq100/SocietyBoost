@@ -9,7 +9,7 @@ class TwitterService implements IFeedService<ITwitterTweet> {
     async loadState(userId: string): Promise<ITwitterTweet[]> {
         if(userId == '0987654321') return chuckPosts;
         return [
-            new TwitterTweet("1","someText", new Date(Date.now()),"1",33, 320, 2800 )
+            new TwitterTweet("1","someText", new Date(Date.now()),"1",33, 320, 2800,[] )
         ]
     }
     refeshState(): Promise<ITwitterTweet[]> {

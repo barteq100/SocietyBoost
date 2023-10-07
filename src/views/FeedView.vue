@@ -10,9 +10,7 @@ import { TwitterTweet } from '@/models/twitter/twitterTweet';
 
 <template>
     <div class="grid grid-row gap-1">
-        <div v-for="(content, index) in appState.getContent" :key="index+'-content'" class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-auto">
-            <TwitterPost :post="(content as TwitterTweet)"/>
-        </div>
+        <TwitterPost v-for="(content, index) in appState.getContent" :post="(content as TwitterTweet)"/>
     </div>
     
     

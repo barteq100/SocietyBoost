@@ -1,6 +1,6 @@
 interface IUser {
     id: string;
     name: string;
-    userName: string;
+    username: string;
     profile_image: string;
 }

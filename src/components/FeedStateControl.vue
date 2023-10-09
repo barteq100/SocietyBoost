@@ -25,13 +25,4 @@ feeds.forEach((feed) => {
 </template>
 
 <style lang="scss" scoped>
- .grid-auto {
-   grid: 60px 1fr / 60px calc(100% - 60px);
-    .TwitterFeedComponent {
-      grid-column: 1;
-      overflow: hidden;
-      display: grid;
-      grid: repeat(8, 60px) / 100%;
-    }
- }
 </style>

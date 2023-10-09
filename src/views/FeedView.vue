@@ -1,23 +1,55 @@
-
 <script setup lang="ts">
-import TwitterPost from '@/components/TwitterPost.vue';
-import { useAppState } from '@/composables/appStore';
-import { TwitterTweet } from '@/models/twitter/twitterTweet';
+import InstagramPost from '@/components/InstagramPost.vue'
+import TwitterPost from '@/components/TwitterPost.vue'
+import { useAppState } from '@/composables/appStore'
+import { FeedType } from '@/models/feedType'
+import { InstagramFeed } from '@/models/instagram/instagramFeed'
+import { type IInstagramMedia } from '@/models/instagram/instagramMedia'
+import { TwitterFeed } from '@/models/twitter/twitterFeed'
+import { TwitterTweet } from '@/models/twitter/twitterTweet'
+import { ref, watch } from 'vue'
 
-    const appState = useAppState();
+const appState = useAppState()
+const feeds = appState.getActiveFeeds
+const feedsByType = ref({
+  twitterFeeds: new Array<TwitterFeed>(),
+  instagramFeeds: new Array<InstagramFeed>()
+})
+watch(feeds, () => {
+  feedsByType.value = {
+    twitterFeeds: new Array<TwitterFeed>(),
+    instagramFeeds: new Array<InstagramFeed>()
+  }
+  feeds.reduce((prevValue, currentValue) => {
+    if (currentValue.type === FeedType.Twitter)
+      feedsByType.value.twitterFeeds.push(currentValue as TwitterFeed)
+    else if (currentValue.type === FeedType.Instagram)
+      feedsByType.value.instagramFeeds.push(currentValue as InstagramFeed)
+    return feedsByType
+  }, feedsByType)
+})
 
+function GetTwitterContent(feed: TwitterFeed) {
+  const store = feed.store();
+  return store.getContent;
+}
 </script>
 
 <template>
-    <div class="grid grid-row gap-1">
-        <TwitterPost v-for="(content, index) in appState.getContent" :post="(content as TwitterTweet)"/>
+  <div class="grid grid-row gap-1">
+    <div v-for="feed in feeds">
+      <TwitterPost
+        v-if="feed.type === FeedType.Twitter"
+        v-for="(content, index) in (feed as TwitterFeed).store().content"
+        :post="content as TwitterTweet"
+      />
+      <InstagramPost
+        v-if="feed.type === FeedType.Instagram"
+        v-for="(content, index) in (feed as InstagramFeed).StoreState.content"
+        :post="content as IInstagramMedia"
+      />
     </div>
-    
-    
+  </div>
 </template>
 
-
-
-<style lang="">
-    
-</style>
+<style></style>

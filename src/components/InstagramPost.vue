@@ -1,24 +1,26 @@
 <script setup lang="ts">
-import {ToMediaType} from '@/models/twitter/twitterTweetResponse'
-import { useAppState } from '@/composables/appStore'
-import type { TwitterTweet } from '@/models/twitter/twitterTweet'
-import { type IMediaConent, MediaType } from '@/models/mediaContent';
 import MediaComponent from './MediaComponent.vue';
+import CarouselComponent from './CarouselComponent.vue';
+import { useAppState } from '@/composables/appStore'
+import { type IMediaConent, MediaType } from '@/models/mediaContent';
+import  { type IInstagramMedia, InstagramMedia, InstagramMediaType, ToMediaType } from '@/models/instagram/instagramMedia';
 
 const props = defineProps<{
-  post: TwitterTweet
-}>()
+  post: IInstagramMedia
+}>() 
+const postData = InstagramMedia.FromIInstagramMedia(props.post);
 const appStore = useAppState()
-const fuser = appStore.users.find((x) => x.id == props.post.author_id)
+const fuser = appStore.users.find((x) => x.id == postData.owner.id)
 const user = fuser as IUser
 const formatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' })
-const date = `${formatter.format(props.post.created_at)}`;
+const date = `${formatter.format(postData.created_at)}`;
+const notCarousel = postData.media_type != InstagramMediaType.CAROUSEL_ALBUM;
 </script>
 
 <template>
   <div class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-auto">
     <div class="grid grid-col">
-      <div class="twitter-banner relative">
+      <div class="instagram-banner relative">
         <img class="absolute inset-y-0 right-0 w-12 h-12" src="@/assets/TwitterX.svg" />
       </div>
       <div class="twitter-style">
@@ -37,7 +39,8 @@ const date = `${formatter.format(props.post.created_at)}`;
             </div>
           </div>
           <div class="tweet-img-wrap">
-            <!-- <MediaComponent :media="media"/> -->
+            <MediaComponent v-if="notCarousel" :media="{type: ToMediaType(postData.media_type), url: postData.media_url}"/>
+            <CarouselComponent v-else :media="postData"/>
           </div>
           <div class="tweet-info-counts">
             <div class="comments">
@@ -58,29 +61,7 @@ const date = `${formatter.format(props.post.created_at)}`;
                   d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
                 ></path>
               </svg>
-              <div class="comment-count">{{ post.comment_count }}</div>
-            </div>
-
-            <div class="retweets">
-              <svg
-                class="feather feather-repeat sc-dnqmqq jxshSx"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="17 1 21 5 17 9"></polyline>
-                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                <polyline points="7 23 3 19 7 15"></polyline>
-                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-              </svg>
-              <div class="retweet-count">{{ post.retweets_count }}</div>
+              <div class="comment-count">{{ postData.comments.count }}</div>
             </div>
 
             <div class="likes">
@@ -101,7 +82,7 @@ const date = `${formatter.format(props.post.created_at)}`;
                   d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
                 ></path>
               </svg>
-              <div class="likes-count">{{ post.likes_count }}</div>
+              <div class="likes-count">{{ postData.likes.count }}</div>
             </div>
 
             <div class="message">
@@ -133,7 +114,7 @@ const date = `${formatter.format(props.post.created_at)}`;
 img {
   max-width: 100%;
 }
-.twitter-banner {
+.instagram-banner {
   height: 3rem;
   width: 100%;
   background: rgb(208, 208, 208);

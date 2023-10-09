@@ -1,4 +1,4 @@
-import type { IFeedStoreState, IFeedActions } from "@/models/feed";
+import type { IFeedStoreState, IFeedActions, IFeedGetters } from "@/models/feed";
 import type { IContentModel } from "@/models/iconentmodel";
 import { defineStore} from "pinia";
 
@@ -14,7 +14,7 @@ export function getFeedStore<T extends IContentModel>(name: string, userId: stri
             state: false
         }),
         getters: {
-
+            getContent: (state) => state.content, // TODO fix this getter in IFeedGetters
         },
         actions: {
         async loadState() {

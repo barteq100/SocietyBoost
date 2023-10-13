@@ -1,8 +1,6 @@
 import { useInstagramStore, type InstagramStoreDefinition } from "@/composables/instagramStore";
-import type { IFeed, IFeedActions, IFeedGetters, IFeedStoreState } from "../feed";
+import type { IFeed } from "../feed";
 import { FeedType } from "../feedType";
-import type { IInstagramMedia } from "./instagramMedia";
-import type { Store } from "pinia";
 
 export class InstagramFeed implements IFeed {
     readonly name: string;
@@ -25,9 +23,15 @@ export class InstagramFeed implements IFeed {
     public set state(value: boolean) {
         this._state = value;
     }
-
+  
     public ToggleState(): void{
         this._state = !this._state;
+        if(this._state)
+        {
+            this.store().loadState();
+        } else {
+            this.store().unloadState();
+        }
     }
 
 }

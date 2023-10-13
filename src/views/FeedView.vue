@@ -2,6 +2,7 @@
 import InstagramPost from '@/components/InstagramPost.vue'
 import TwitterPost from '@/components/TwitterPost.vue'
 import { useAppState } from '@/composables/appStore'
+import type { IFeed } from '@/models/feed'
 import { FeedType } from '@/models/feedType'
 import { InstagramFeed } from '@/models/instagram/instagramFeed'
 import { type IInstagramMedia } from '@/models/instagram/instagramMedia'
@@ -29,27 +30,22 @@ watch(feeds, () => {
   }, feedsByType)
 })
 
-function GetTwitterContent(feed: TwitterFeed) {
+function GetContent(feed: IFeed) {
   const store = feed.store();
-  return store.getContent;
+  return store.content;
 }
 </script>
 
 <template>
-  <div class="grid grid-row gap-1">
-    <div v-for="feed in feeds">
-      <TwitterPost
-        v-if="feed.type === FeedType.Twitter"
-        v-for="(content, index) in (feed as TwitterFeed).store().content"
-        :post="content as TwitterTweet"
-      />
-      <InstagramPost
-        v-if="feed.type === FeedType.Instagram"
-        v-for="(content, index) in (feed as InstagramFeed).StoreState.content"
-        :post="content as IInstagramMedia"
-      />
-    </div>
+  <div class="flex flex-col flex-nowrap gap-1 max-w-half" v-for="feed in appState.getActiveFeeds">
+      <InstagramPost v-if="feed.type === FeedType.Instagram" v-for="content in GetContent(feed)" :post="(content as IInstagramMedia)" />
+      <TwitterPost  v-if="feed.type === FeedType.Twitter" v-for="content in GetContent(feed)" :post="(content as TwitterTweet)" />
   </div>
 </template>
 
-<style></style>
+<style lang="scss">
+.max-w-half {
+  max-width: 50vw;
+  min-width: 50vw;
+}
+</style>

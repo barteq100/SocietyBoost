@@ -16,7 +16,7 @@ const date = `${formatter.format(props.post.created_at)}`;
 </script>
 
 <template>
-  <div class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-auto">
+  <div class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-auto h-fit">
     <div class="grid grid-col">
       <div class="twitter-banner relative">
         <img class="absolute inset-y-0 right-0 w-12 h-12" src="@/assets/TwitterX.svg" />
@@ -152,7 +152,6 @@ img {
 }
 
 .tweet-wrap {
-  max-width: 490px;
   background: #fff;
   border-radius: 3px;
   padding: 30px;

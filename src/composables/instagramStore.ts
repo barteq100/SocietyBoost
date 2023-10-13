@@ -8,7 +8,10 @@ class InstagramService implements IFeedService<IInstagramMedia> {
     async loadState(userId: string): Promise<IInstagramMedia[]> {
         var result = await instagramFeedResponseMock
         .then(x => x.json() as Promise<InstagramResponse>)
-        .then(x => x.data);
+        .then(p => {
+            const d = p.data;
+            return d;
+        });
 
         return result;
     }

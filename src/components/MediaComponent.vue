@@ -28,13 +28,13 @@ export default {
     function getYouTubePoperties(media: IMediaConent) {
         const hasEmbed = media.url.includes("embed");
         const url = hasEmbed ? media.url : parseUrlToEmbed(media.url);
-        return {src: url, width: "720", height: "480", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", allowfullscreen: true}
+        return {src: url, width: "720", height: "480", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", allowfullscreen: true, class: "object-cover max-w-md"}
     }
     function getRenderProperties(media: IMediaConent): object {
         switch (media.type) {
         case MediaType.GIF:
         case MediaType.IMAGE:
-          return {src: media.url};
+          return {src: media.url, class: "object-cover max-w-md"};
         case MediaType.VIDEO:
             if(isYouTube(media.url)){
                 return getYouTubePoperties(media);
@@ -55,4 +55,4 @@ export default {
    
 </template>
 
-<style lang=""></style>
+<style lang="" scoped></style>

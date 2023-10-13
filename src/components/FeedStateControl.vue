@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { useAppState } from '@/composables/appStore'
-import {watch} from 'vue'
 
 const appState = useAppState()
 const feeds = appState.feeds
-feeds.forEach((feed) => {
-  watch(feed, () => {
-    const feedStore = feed.store()
-    if (!!feed.state) {
-      console.log(`Load State for store: ${feed.name} `)
-      feedStore.loadState()
-    } else {
-      console.log(`Unload State for store: ${feed.name}`)
-      feedStore.unloadState()
-    }
-  })
-})
+// feeds.forEach((feed) => {
+//   watch(feed, () => {
+//     const feedStore = feed.store()
+//     if (!!feed.state) {
+//       console.log(`Load State for store: ${feed.name} `)
+//       feedStore.loadState()
+//     } else {
+//       console.log(`Unload State for store: ${feed.name}`)
+//       feedStore.unloadState()
+//     }
+//   })
+// })
 </script>
 
 <template lang="">

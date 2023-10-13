@@ -28,6 +28,12 @@ export class TwitterFeed implements IFeed {
 
     public ToggleState(): void{
         this._state = !this._state;
+        if(this._state)
+        {
+            this.store().loadState();
+        } else {
+            this.store().unloadState();
+        }
     }
 
 }

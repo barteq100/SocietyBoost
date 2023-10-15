@@ -40,12 +40,14 @@
 
 <template>
     <div class="carousel">
-      <img v-for="(image, index) in images" :src="image" :key="image" />
-      <button @click="prev">Previous</button>
-      <button @click="next">Next</button>
-      <div class="indicators">
-        <span v-for="image in images" :class="{ active: currentImage === index }"></span>
-      </div>
+        <div v-for="(image, index) in images">
+            <img :src="image" key="image" />
+            <div class="indicators">
+                <span v-for="image in images" :class="{ active: currentImage === index }"></span>
+            </div>
+            <button @click="prev">Previous</button>
+            <button @click="next">Next</button>
+        </div>
     </div>
   </template>
   

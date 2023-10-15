@@ -1,4 +1,5 @@
-export const instagramFeedResponseMock: Promise<Response> = Promise.resolve(Response.json(
+export const instagramFeedResponseMock = async () => {
+  var response = new Response(JSON.stringify(
   {
   data: [
     {
@@ -53,11 +54,13 @@ export const instagramFeedResponseMock: Promise<Response> = Promise.resolve(Resp
       }
     }
   ]
-}
-  ));
+}))
+return response;
+};
 
 
-export const instagramMediaResponseMock: Promise<Response> = Promise.resolve(Response.json({
+export const instagramMediaResponseMock = async () => { 
+  var response = new Response(JSON.stringify({
   "data": [
     {
       "id": "1234567890",
@@ -78,4 +81,6 @@ export const instagramMediaResponseMock: Promise<Response> = Promise.resolve(Res
       "caption": "This is the caption for the third image."
     }
   ]
-}));
+}))
+  return response;
+};

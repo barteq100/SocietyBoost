@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {type InstagramFeed} from '@/models/instagram/instagramFeed';
+import InstagramIcon from './icons/InstagramIcon.vue';
 const props = defineProps<{
   feed: InstagramFeed
 }>()
@@ -10,10 +11,10 @@ function toggleState() {
 }
 </script>
 
-<template lang="">
+<template>
     <div class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-hidden card-min-max-h-sized" @click="toggleState()">
         <div class="flex flex-row flex-nowrap card-min-max-h card-min-max-w">
-          <img class="flex-none card-min-max-h-sized card-min-max-w-sized" src="@/assets/InstagramLogo.svg">
+          <InstagramIcon class="flex-none card-min-max-h-sized card-min-max-w-sized"/>
           <p class="flex-none align-middle pt-4">{{feedName}}</p>
         </div> 
     </div>

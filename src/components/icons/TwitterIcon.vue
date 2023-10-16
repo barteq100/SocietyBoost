@@ -1,5 +1,5 @@
 <template>
-<svg version="1.1" id="svg5" xmlns:svg="http://www.w3.org/2000/svg"
+<svg :class="class" version="1.1" id="svg5" xmlns:svg="http://www.w3.org/2000/svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1668.56 1221.19"
 	 style="enable-background:new 0 0 1668.56 1221.19;" xml:space="preserve">
 <g id="layer1" transform="translate(52.390088,-25.058597)">
@@ -9,6 +9,9 @@
 </svg>
 </template>
 <script setup lang="ts">
+const props = defineProps<{
+  class?: string
+}>()
 </script>
 <style>
     

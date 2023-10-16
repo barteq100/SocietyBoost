@@ -17,9 +17,7 @@ const date = `${formatter.format(props.post.created_at)}`;
   <div class="block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-auto h-fit">
     <div class="grid grid-col">
       <div class="twitter-banner relative">
-        <div class="absolute inset-y-0 right-0 w-12 h-12">
-          <TwitterIcon/>
-        </div>
+        <TwitterIcon class="absolute inset-y-0 right-0 w-12 h-12"/>
       </div>
       <div class="twitter-style">
         <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet" />

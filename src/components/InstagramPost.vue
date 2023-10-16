@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MediaComponent from './MediaComponent.vue';
 import CarouselComponent from './CarouselComponent.vue';
+import InstagramIcon from './icons/InstagramIcon.vue';
 import { useAppState } from '@/composables/appStore'
 import  { type IInstagramMedia, InstagramMedia, InstagramMediaType, ToMediaType } from '@/models/instagram/instagramMedia';
 
@@ -20,7 +21,9 @@ const notCarousel = postData.media_type != InstagramMediaType.CAROUSEL_ALBUM;
   <div class="flex-none block bg-white border border-gray-200 rounded-lg shadow text-clip overflow-hidden max-h-full">
     <div class="flex flex-col max-h-full">
       <div class="instagram-banner relative">
-        <img class="absolute inset-y-0 right-0 w-12 h-12" src="./../assets/instagramLogo.svg" />
+        <div class="absolute inset-y-0 right-0 w-12 h-12">
+          <InstagramIcon/>
+        </div>
       </div>
       <div class="twitter-style">
         <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet" />

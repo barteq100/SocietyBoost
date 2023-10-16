@@ -1,5 +1,5 @@
 export const instagramFeedResponseMock = async () => {
-  var response = new Response(JSON.stringify(
+  const response = new Response(JSON.stringify(
   {
   data: [
     {
@@ -60,7 +60,7 @@ return response;
 
 
 export const instagramMediaResponseMock = async () => { 
-  var response = new Response(JSON.stringify({
+  const response = new Response(JSON.stringify({
   "data": [
     {
       "id": "1234567890",

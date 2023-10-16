@@ -19,7 +19,7 @@ const feeds = appState.feeds
 
 <template lang="">
   <div class="grid grid-row-auto gap-1">
-        <component v-for="feed: IFeed in feeds" :is="`${feed.type}FeedComponent`" :feed="feed"></component>
+        <component v-for="(feed, index) in feeds" :is="`${feed.type}FeedComponent`" :feed="feed" :key="'feed-'+index"></component>
   </div>
 </template>
 

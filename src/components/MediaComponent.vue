@@ -51,8 +51,4 @@ export default {
 }
 </script>
 
-<template lang="">
-   
-</template>
-
 <style lang="" scoped></style>

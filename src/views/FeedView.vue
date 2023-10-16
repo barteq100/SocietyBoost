@@ -37,9 +37,13 @@ function GetContent(feed: IFeed) {
 </script>
 
 <template>
-  <div class="flex flex-col flex-nowrap gap-1 max-w-half" v-for="feed in appState.getActiveFeeds">
-      <InstagramPost v-if="feed.type === FeedType.Instagram" v-for="content in GetContent(feed)" :post="(content as IInstagramMedia)" />
-      <TwitterPost  v-if="feed.type === FeedType.Twitter" v-for="content in GetContent(feed)" :post="(content as TwitterTweet)" />
+  <div class="flex flex-col flex-nowrap gap-1 max-w-half" v-for="(feed, fi) in appState.getActiveFeeds" :key="'af-'+fi">
+      <div v-if="feed.type === FeedType.Instagram" :key="'f-'+fi">
+        <InstagramPost v-for="(content, ci) in GetContent(feed)" :key="'f-'+fi+'c-'+ci" :post="(content as IInstagramMedia)" />
+      </div>
+      <div v-if="feed.type === FeedType.Twitter" :key="'f-'+fi">
+        <TwitterPost   v-for="(content, ci) in GetContent(feed)" :key="'f-'+fi+'c-'+ci" :post="(content as TwitterTweet)" />
+      </div>
   </div>
 </template>
 

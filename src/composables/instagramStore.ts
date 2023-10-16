@@ -6,7 +6,7 @@ import { instagramFeedResponseMock, instagramMediaResponseMock } from "@/models/
 class InstagramService implements IFeedService<IInstagramMedia> {
 
     async loadState(userId: string): Promise<IInstagramMedia[]> {
-        var result = await instagramFeedResponseMock()
+        const result = await instagramFeedResponseMock()
         .then(x => x.json() as Promise<InstagramResponse>)
         .then(p => {
             const d = p.data;
@@ -17,7 +17,7 @@ class InstagramService implements IFeedService<IInstagramMedia> {
     }
 
     async getCarouselItems(mediaId: string): Promise<IInstagramMedia[]>{
-        var result = await instagramMediaResponseMock()
+        const result = await instagramMediaResponseMock()
         .then(x => x.json() as Promise<InstagramResponse>)
         .then(x => x.data);
 

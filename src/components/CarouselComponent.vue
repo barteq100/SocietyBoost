@@ -39,7 +39,7 @@ watch(currentImage, (value) => {
     <div class="absolute inset-x-0 bottom-0">
       <span v-for="(image, index) in images" :class="{ active: currentImage === index }" :key="'indicator-'+image"></span>
     </div>
-    <button class="absolute inset-y-0 left-0 w-16" @click="prev"><img class="object-cover w-24 z-10" src="@/assets/left.svg"/></button>
+    <button class="absolute inset-y-0 left-0 w-16" @click="prev">Prev</button>
     <button class="absolute inset-y-0 right-0 w-16" @click="next">Next</button>
   </div>
 </template>
